@@ -6,15 +6,15 @@ class HomePage extends StatelessWidget {
   Widget rubrique(IconData icone, String titre) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.green.shade50,
+          color: Colors.blue.shade50,
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.blue.shade100),
         ),
         child: Column(
           children: [
-            Icon(icone, size: 40, color: Colors.green),
+            Icon(icone, size: 40, color: Colors.blue),
             const SizedBox(height: 8),
             Text(
               titre,
@@ -47,7 +47,6 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
@@ -72,18 +71,25 @@ class HomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
+
               const SizedBox(height: 24),
 
+              // Première ligne : deux rubriques
               Row(
                 children: [
                   rubrique(Icons.menu_book, 'Mes cours'),
+                  const SizedBox(width: 12),
                   rubrique(Icons.calendar_month, 'Planning'),
                 ],
               ),
 
+              const SizedBox(height: 12),
+
+              // Deuxième ligne : deux rubriques
               Row(
                 children: [
                   rubrique(Icons.person, 'Mon profil'),
+                  const SizedBox(width: 12),
                   rubrique(Icons.task_alt, 'Mes tâches'),
                 ],
               ),
