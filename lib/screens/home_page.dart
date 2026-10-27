@@ -88,9 +88,9 @@ class HomePage extends StatelessWidget {
               // Deuxième ligne : deux rubriques
               Row(
                 children: [
-                  rubrique(Icons.person, 'Mon profil'),
+                  rubrique(Icons.menu_book, 'Mes cours'),
                   const SizedBox(width: 12),
-                  rubrique(Icons.task_alt, 'Mes tâches'),
+                  rubrique(Icons.calendar_month, 'Planning'),
                 ],
               ),
             ],
