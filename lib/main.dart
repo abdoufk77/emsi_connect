@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:emsi_connect/screens/home_page.dart';
 
+// import 'package:emsi_connect/screens/home_page.dart';
+import 'screens/courses_page.dart';
 import 'screens/profile_page.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Emsi connect',
       debugShowCheckedModeBanner: false,
-      home: const ProfilePage(),
+      // home: const ProfilePage(),
+      home: const CoursesPage(),
     );
   }
 }
