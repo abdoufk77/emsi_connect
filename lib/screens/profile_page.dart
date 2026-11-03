@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
-  Widget information(String titre, String valeur) {
+  Widget information(IconData icone, String titre, String valeur) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -12,7 +12,28 @@ class ProfilePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.blue.shade100),
       ),
-      child: Text('$titre : $valeur', style: const TextStyle(fontSize: 16)),
+      child: Row(
+        children: [
+          Icon(icone, color: Colors.blue, size: 24),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  titre,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(valeur, style: const TextStyle(fontSize: 16)),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -32,7 +53,7 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Bandeau du profil
+              // Bandeau et photo de profil
               SizedBox(
                 height: 150,
                 child: Stack(
@@ -40,21 +61,15 @@ class ProfilePage extends StatelessWidget {
                     Container(
                       height: 110,
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade100,
-                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.blue.shade200,
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-
                     const Align(
                       alignment: Alignment.bottomCenter,
                       child: CircleAvatar(
                         radius: 45,
-                        backgroundColor: Colors.blue,
-                        child: Icon(
-                          Icons.person,
-                          size: 48,
-                          color: Colors.white,
-                        ),
+                        backgroundImage: AssetImage('assets/images/profil.jpg'),
                       ),
                     ),
                   ],
@@ -63,20 +78,65 @@ class ProfilePage extends StatelessWidget {
 
               const SizedBox(height: 24),
 
+              // Titre
+              const Text(
+                'Informations personnelles',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 16),
+
               // Informations personnelles
-              information('Nom', 'Sara El Amrani'),
+              information(Icons.person, 'Nom', 'Soumaya rizaoui'),
 
               const SizedBox(height: 12),
 
-              information('Filière', 'Informatique'),
+              information(Icons.school, 'Filière', 'Informatique - SAP'),
 
               const SizedBox(height: 12),
 
-              information('Niveau', 'S5'),
+              information(Icons.menu_book, 'Niveau', 'S9'),
 
               const SizedBox(height: 12),
 
-              information('Email', 'sara@example.com'),
+              information(Icons.email, 'Email', 'soumaya@example.com'),
+
+              const SizedBox(height: 12),
+
+              information(
+                Icons.calendar_month,
+                'Année universitaire',
+                '2026–2027',
+              ),
+
+              const SizedBox(height: 24),
+
+              // Boutons d'action
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        debugPrint('Modification du profil');
+                      },
+                      icon: const Icon(Icons.edit),
+                      label: const Text('Modifier le profil'),
+                    ),
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        debugPrint('Contacter le profil');
+                      },
+                      icon: const Icon(Icons.contact_mail),
+                      label: const Text('Contacter'),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
