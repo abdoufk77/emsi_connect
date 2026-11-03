@@ -3,149 +3,82 @@ import 'package:flutter/material.dart';
 class CoursesPage extends StatelessWidget {
   const CoursesPage({super.key});
 
+  final List<Map<String, dynamic>> modules = const [
+    {
+      'nom': 'Développement Multi-Plateforme',
+      'info': 'Enseignant : Mme Aouraghe',
+      'icon': Icons.menu_book,
+    },
+    {
+      'nom': 'Bases de données avancées',
+      'info': 'Volume horaire : 40 heures',
+      'icon': Icons.storage,
+    },
+    {
+      'nom': 'Sécurité informatique',
+      'info': 'Enseignant : M. El Amrani',
+      'icon': Icons.security,
+    },
+    {
+      'nom': 'Développement Web',
+      'info': 'Volume horaire : 36 heures',
+      'icon': Icons.computer,
+    },
+    {
+      'nom': 'Intelligence Artificielle',
+      'info': 'Enseignant : Mme Benali',
+      'icon': Icons.psychology,
+    },
+    {
+      'nom': 'Administration des réseaux informatiques',
+      'info': 'Volume horaire : 42 heures',
+      'icon': Icons.network_check,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Mes cours')),
 
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(12),
 
-        children: [
-          Card(
+        itemCount: modules.length,
+
+        itemBuilder: (context, index) {
+          final module = modules[index];
+
+          return Card(
             elevation: 2,
             margin: const EdgeInsets.only(bottom: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
-            child: ListTile(
-              leading: const Icon(Icons.menu_book),
-              title: const Text('Développement Multi-Plateforme'),
-              subtitle: const Text('Enseignant : Mme Aouraghe'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Module sélectionné : Développement Multi-Plateforme',
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
 
-          Card(
-            elevation: 2,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
             child: ListTile(
-              leading: const Icon(Icons.storage),
-              title: const Text('Bases de données avancées'),
-              subtitle: const Text('Volume horaire : 40 heures'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Module sélectionné : Bases de données avancées',
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+              leading: Icon(module['icon']),
 
-          Card(
-            elevation: 2,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: ListTile(
-              leading: const Icon(Icons.security),
-              title: const Text('Sécurité informatique'),
-              subtitle: const Text('Enseignant : M. El Amrani'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Module sélectionné : Sécurité informatique'),
-                  ),
-                );
-              },
-            ),
-          ),
+              title: Text(
+                module['nom'],
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
 
-          Card(
-            elevation: 2,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: ListTile(
-              leading: const Icon(Icons.computer),
-              title: const Text('Développement Web'),
-              subtitle: const Text('Volume horaire : 36 heures'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Module sélectionné : Développement Web'),
-                  ),
-                );
-              },
-            ),
-          ),
+              subtitle: Text(module['info']),
 
-          Card(
-            elevation: 2,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: ListTile(
-              leading: const Icon(Icons.psychology),
-              title: const Text('Intelligence Artificielle'),
-              subtitle: const Text('Enseignant : Mme Benali'),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Module sélectionné : Intelligence Artificielle',
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
 
-          Card(
-            elevation: 2,
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: ListTile(
-              leading: const Icon(Icons.network_check),
-              title: const Text('Administration des réseaux informatiques'),
-              subtitle: const Text('Volume horaire : 42 heures'),
-              trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Module sélectionné : Administration des réseaux informatiques',
-                    ),
+                  SnackBar(
+                    content: Text('Module sélectionné : ${module['nom']}'),
                   ),
                 );
               },
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
