@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 // import 'package:emsi_connect/screens/home_page.dart';
 // import 'screens/courses_page.dart';
 // import 'screens/profile_page.dart';
-import 'screens/login_page.dart';
+import 'screens/register_page.dart';
+
+// import 'screens/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: const ProfilePage(),
       // home: const CoursesPage(),
-      home: LoginPage(),
+      home: const RegisterPage(),
     );
   }
 }
