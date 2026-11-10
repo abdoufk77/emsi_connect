@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  // Clé permettant d'accéder au formulaire
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // Formulaire
   final _formKey = GlobalKey<FormState>();
+
+  // Controllers
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  // Visibilité du mot de passe
+  bool _showPassword = false;
+
+  // Libérer les ressources
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +42,7 @@ class LoginPage extends StatelessWidget {
             children: [
               // Champ Email
               TextFormField(
+                controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
 
                 decoration: const InputDecoration(
@@ -49,13 +71,26 @@ class LoginPage extends StatelessWidget {
 
               // Champ Mot de passe
               TextFormField(
-                obscureText: true,
+                controller: _passwordController,
+                obscureText: !_showPassword,
 
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Mot de passe',
                   hintText: 'Entrez votre mot de passe',
-                  prefixIcon: Icon(Icons.lock_outline),
-                  border: OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  border: const OutlineInputBorder(),
+
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _showPassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+
+                    onPressed: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    },
+                  ),
                 ),
 
                 validator: (value) {
@@ -73,14 +108,15 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 25),
 
-              // Bouton de validation
+              // Bouton Vérifier
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    // Récupérer l'email
+                    final email = _emailController.text.trim();
+
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Saisie valide (test local)'),
-                      ),
+                      SnackBar(content: Text('$email : saisie valide')),
                     );
                   }
                 },
